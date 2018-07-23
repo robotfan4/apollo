@@ -95,6 +95,7 @@ bool QpSplineReferenceLineSmoother::Smooth(
     std::pair<double, double> xy = spline(t);
     xy.first += ref_x_;
     xy.second += ref_y_;
+    //get new ref_sl_point
     common::SLPoint ref_sl_point;
     if (!raw_reference_line.XYToSL({xy.first, xy.second}, &ref_sl_point)) {
       return false;
@@ -104,6 +105,7 @@ bool QpSplineReferenceLineSmoother::Smooth(
       continue;
     }
     ref_sl_point.set_s(std::max(ref_sl_point.s(), 0.0));
+    // get interplot_rlp through new ref_sl_point
     ReferencePoint rlp = raw_reference_line.GetReferencePoint(ref_sl_point.s());
     auto new_lane_waypoints = rlp.lane_waypoints();
     for (auto& lane_waypoint : new_lane_waypoints) {

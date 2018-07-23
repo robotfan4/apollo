@@ -1,0 +1,8 @@
+prefix=/apollo/modules/tools/apollo_ros/devel_isolated/pb_msgs_example
+
+Name: pb_msgs_example
+Description: Description of pb_msgs_example
+Version: 1.0.0
+Cflags: -I/apollo/modules/tools/apollo_ros/devel_isolated/pb_msgs_example/include
+Libs: -L/apollo/modules/tools/apollo_ros/devel_isolated/pb_msgs_example/lib -lpb_msgs_example_proto
+Requires: roscpp roscpp genmsg gencpp genpy pb_msgs std_msgs

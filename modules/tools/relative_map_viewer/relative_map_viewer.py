@@ -40,6 +40,7 @@ def evaluate_poly(c0, c1, c2, c3, x):
 def localization_callback(localization_pb2):
     global localization_pb
     localization_pb = localization_pb2
+    print 'localization callback'+ repr(localization_pb)
 
 
 def draw_lane_boundary(lane, ax, color_val, lane_marker):
@@ -148,7 +149,7 @@ def update(frame_number):
         for lane in map_msg.hdmap.lane:
             draw_lane_boundary(lane, ax, 'b', map_msg.lane_marker)
             draw_lane_central(lane, ax, 'r')
-
+	    print 'lane is: '+repr(lane)
         for key in map_msg.navigation_path:
             x = []
             y = []
@@ -163,20 +164,21 @@ def update(frame_number):
         for tp in planning_msg.trajectory_point:
             x.append(tp.path_point.y)
             y.append(tp.path_point.x)
-        ax.plot(x, y, ls=':', c='r', linewidth=5.0)
+        ax.plot(x, y, ls='-', c='r', linewidth=5.0)
+        print 'x is: '+ repr(x)+'y is:'+ repr(y)
 
-    ax.axvline(x=0.0, alpha=0.3)
-    ax.axhline(y=0.0, alpha=0.3)
-    ax.set_xlim([10, -10])
-    ax.set_ylim([-10, 200])
-    y = 10
-    while y < 200:
-        ax.plot([10, -10], [y, y], ls='-', c='g', alpha=0.3)
-        y = y + 10
-    plt.yticks(np.arange(10, 200, 10))
-    adc = plt.Circle((0, 0), 0.3, color='r')
-    plt.gcf().gca().add_artist(adc)
-    ax.relim()
+#    ax.axvline(x=0.0, alpha=0.3)
+#    ax.axhline(y=0.0, alpha=0.3)
+#    ax.set_xlim([10, -10])
+#    ax.set_ylim([-10, 200])
+#    y = 10
+#    while y < 200:
+#        ax.plot([10, -10], [y, y], ls='-', c='g', alpha=0.3)
+#        y = y + 10
+#    plt.yticks(np.arange(10, 200, 10))
+#    adc = plt.Circle((0, 0), 0.3, color='r')
+#    plt.gcf().gca().add_artist(adc)
+#    ax.relim()
 
 
 def map_callback(map_msg_pb):
@@ -186,6 +188,7 @@ def map_callback(map_msg_pb):
 def planning_callback(planning_msg_pb):
     global planning_msg
     planning_msg = planning_msg_pb
+    #print 'planning callback'
 
 
 def add_listener():

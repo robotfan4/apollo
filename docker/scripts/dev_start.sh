@@ -270,6 +270,8 @@ function main(){
         -e DOCKER_GRP_ID=$GRP_ID \
         -e DOCKER_IMG=$IMG \
         $(local_volumes) \
+        --env ROS_MASTER_URI=http://172.17.0.1:11311 \
+        --env ROS_IP=172.17.0.1 \
         --net host \
         -w /apollo \
         --add-host in_dev_docker:127.0.0.1 \
